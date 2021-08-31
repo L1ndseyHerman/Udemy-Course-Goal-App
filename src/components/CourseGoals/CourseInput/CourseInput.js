@@ -26,18 +26,14 @@ const CourseInput = props => {
     props.onAddGoal(enteredValue);
   };
 
+  //  When a className is in {}, can choose like the regular CSS class or the error one!
+  //  Backticks (``) are a JS feature that let you do dynamic strings.
+  //  The $ means an expression is up next in the {}.
   return (
     <form onSubmit={formSubmitHandler}>
-      <div className="form-control">
-        <label style={{color: !isValid ? 'red' : 'black'}}>Course Goal</label>
-        <input 
-          type="text" 
-          style={{
-            borderColor: !isValid ? 'red' : '#ccc',
-            background: !isValid ? 'salmon' : 'transparent'
-          }} 
-          onChange={goalInputChangeHandler} 
-        />
+      <div className={`form-control ${!isValid ? 'invalid' : ''}`}>
+        <label>Course Goal</label>
+        <input type="text" onChange={goalInputChangeHandler} />
       </div>
       <Button type="submit">Add Goal</Button>
     </form>
