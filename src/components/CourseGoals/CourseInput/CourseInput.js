@@ -1,7 +1,36 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 import Button from '../../UI/Button/Button';
 import './CourseInput.css';
+
+const FormControl = styled.div`
+  margin: 0.5rem 0;
+
+& label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+  color: ${props => (props.invalid ? 'red' : 'black')};
+}
+
+& input {
+  display: block;
+  width: 100%;
+  /* This is a conditional thingie in styled components. Gets all the props like "invalid". */
+  border: 1px solid ${props => (props.invalid ? 'red': '#ccc')};
+  background: ${props => (props.invalid ? '#ffd7d7' : 'transparent')};
+  font: inherit;
+  line-height: 1.5rem;
+  padding: 0 0.25rem;
+}
+
+& input:focus {
+  outline: none;
+  background: #fad0ec;
+  border-color: #8b005d;
+}
+`;
 
 const CourseInput = props => {
   const [enteredValue, setEnteredValue] = useState('');
@@ -26,15 +55,14 @@ const CourseInput = props => {
     props.onAddGoal(enteredValue);
   };
 
-  //  When a className is in {}, can choose like the regular CSS class or the error one!
-  //  Backticks (``) are a JS feature that let you do dynamic strings.
-  //  The $ means an expression is up next in the {}.
+  //className={!isValid && 'invalid'}
+//  && only returns the thing after it if the thing before it is true, otherwise returns nothing.
   return (
     <form onSubmit={formSubmitHandler}>
-      <div className={`form-control ${!isValid ? 'invalid' : ''}`}>
+      <FormControl invalid={!isValid}>
         <label>Course Goal</label>
         <input type="text" onChange={goalInputChangeHandler} />
-      </div>
+      </FormControl>
       <Button type="submit">Add Goal</Button>
     </form>
   );
