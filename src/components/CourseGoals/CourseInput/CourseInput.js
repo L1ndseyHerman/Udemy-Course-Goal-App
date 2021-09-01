@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 
 import Button from '../../UI/Button/Button';
-import './CourseInput.css';
+import styles from './CourseInput.module.css';
 
-const FormControl = styled.div`
+/*const FormControl = styled.div`
   margin: 0.5rem 0;
 
 & label {
@@ -17,7 +16,7 @@ const FormControl = styled.div`
 & input {
   display: block;
   width: 100%;
-  /* This is a conditional thingie in styled components. Gets all the props like "invalid". */
+  /* This is a conditional thingie in styled components. Gets all the props like "invalid".
   border: 1px solid ${props => (props.invalid ? 'red': '#ccc')};
   background: ${props => (props.invalid ? '#ffd7d7' : 'transparent')};
   font: inherit;
@@ -30,7 +29,7 @@ const FormControl = styled.div`
   background: #fad0ec;
   border-color: #8b005d;
 }
-`;
+`;*/
 
 const CourseInput = props => {
   const [enteredValue, setEnteredValue] = useState('');
@@ -59,10 +58,10 @@ const CourseInput = props => {
 //  && only returns the thing after it if the thing before it is true, otherwise returns nothing.
   return (
     <form onSubmit={formSubmitHandler}>
-      <FormControl invalid={!isValid}>
+      <div className={`${styles['form-control']} ${!isValid && styles.invalid}`}>
         <label>Course Goal</label>
         <input type="text" onChange={goalInputChangeHandler} />
-      </FormControl>
+      </div>
       <Button type="submit">Add Goal</Button>
     </form>
   );
